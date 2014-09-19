@@ -1,0 +1,14 @@
+{
+  "name": "buzzdeee-puppetdashboard",
+  "version": "0.1.0",
+  "author": "buzzdeee",
+  "summary": "A Puppet module to manage the Puppet Dashboard",
+  "license": "Apache 2.0",
+  "source": "https://github.com/buzzdeee/buzzdeee-puppetboard.git",
+  "project_page": "https://github.com/buzzdeee/buzzdeee-puppetboard",
+  "issues_url": "https://github.com/buzzdeee/buzzdeee-puppetboard/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
