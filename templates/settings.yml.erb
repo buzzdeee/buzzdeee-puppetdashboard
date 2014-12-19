@@ -1,2 +1,7 @@
-<% general_settings.each_pair do |key, value| %><%= key %>: '<%= value %>'
+<% general_settings.each_pair do |key, value| -%>
+<% if key == 'no_longer_reporting_cutoff' -%>
+<%= key %>: <%= value %>
+<% else -%>
+<%= key %>: '<%= value %>'
+<% end -%>
 <% end %>

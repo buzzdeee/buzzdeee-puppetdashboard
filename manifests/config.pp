@@ -38,7 +38,8 @@ class puppetdashboard::config (
   }
 
   exec { 'migrate puppetdashboard db':
-    command     => "cd ${installation_path} && sudo -u _puppet-dashboard LD_PRELOAD=libpthread.so rake18 RAILS_ENV=production db:migrate",
+    command     => '/usr/bin/sudo -u _puppet-dashboard LD_PRELOAD=libpthread.so /usr/local/bin/rake18 RAILS_ENV=production db:migrate',
+    cwd         => "${installation_path}",
     subscribe   => [ Concat["${installation_path}/config/settings.yml"], Concat["${installation_path}/config/database.yml"] ],
     refreshonly => true,
   }
