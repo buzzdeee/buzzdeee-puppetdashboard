@@ -35,6 +35,7 @@ class puppetdashboard::params {
   }
   $database_settings = {
     'production' => {
+       host     => 'localhost',
        adapter  => 'mysql',
        database => 'dashboard_production',
        username => 'dashboard',
