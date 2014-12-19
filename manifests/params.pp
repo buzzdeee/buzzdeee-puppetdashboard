@@ -50,9 +50,9 @@ class puppetdashboard::params {
   $daemon_name = 'puppet_dashboard'
   $daemon_ensure = 'running'
   $daemon_enable = true
-  $daemon_flags =  ''
+  $daemon_flags = '-e production'
   $workers_name = 'puppet_dashboard_workers'
   $workers_ensure = 'running'
   $workers_enable = true
-  $workers_flags = ''
+  $workers_flags = '-p dashboard -n 4 -m'
 }

@@ -36,4 +36,11 @@ class puppetdashboard::config (
     content => template('puppetdashboard/database-contents.yml.erb'),
     order   => '10',
   }
+
+  exec { 'migrate puppetdashboard db':
+    command     => "cd ${installation_path} && sudo -u _puppet-dashboard LD_PRELOAD=libpthread.so rake18 RAILS_ENV=production db:migrate",
+    subscribe   => [ Concat["${installation_path}/config/settings.yml"], Concat["${installation_path}/config/database.yml"] ],
+    refreshonly => true,
+  }
+
 }
