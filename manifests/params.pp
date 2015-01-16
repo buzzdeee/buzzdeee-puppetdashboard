@@ -1,3 +1,6 @@
+# Private class, do not use directly,
+# The parameters that drive this module.
+
 class puppetdashboard::params {
   $general_settings = {
     cn_name                          => 'dashboard',
@@ -31,16 +34,16 @@ class puppetdashboard::params {
     groups_per_page                  => 50,
     reports_per_page                 => 20,
     radiator_refresh_rate            => 60,
-    application_refresh_rate         => 5,        
+    application_refresh_rate         => 5,
   }
   $database_settings = {
     'production' => {
-       host     => 'localhost',
-       adapter  => 'mysql',
-       database => 'dashboard_production',
-       username => 'dashboard',
-       password => 'dashboard',
-       encoding => 'utf8',
+      host     => 'localhost',
+      adapter  => 'mysql',
+      database => 'dashboard_production',
+      username => 'dashboard',
+      password => 'dashboard',
+      encoding => 'utf8',
     }
   }
   $installation_path = '/var/www/puppet-dashboard'

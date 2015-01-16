@@ -29,11 +29,11 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 Sebastian Reitenbach, unless otherwise noted.
 #
 class puppetdashboard (
   $override_general_settings = $puppetdashboard::params::general_settings,
@@ -51,9 +51,8 @@ class puppetdashboard (
   $workers_enable = $puppetdashboard::params::workers_enable,
   $workers_flags = $puppetdashboard::params::workers_flags,
 ) inherits puppetdashboard::params {
-  include stdlib
 
-  class { puppetdashboard::install:
+  class { 'puppetdashboard::install':
     package_name   => $package_name,
     package_ensure => $package_ensure,
   }
@@ -61,13 +60,13 @@ class puppetdashboard (
   $general_settings  = deep_merge($puppetdashboard::params::general_settings, $override_general_settings)
   $database_settings = deep_merge($puppetdashboard::params::database_settings, $override_database_settings)
 
-  class { puppetdashboard::config:
-    general_settings => $general_settings,
+  class { 'puppetdashboard::config':
+    general_settings  => $general_settings,
     database_settings => $database_settings,
     installation_path => $installation_path,
   }
 
-  class { puppetdashboard::service:
+  class { 'puppetdashboard::service':
     daemon_name    => $daemon_name,
     daemon_ensure  => $daemon_ensure,
     daemon_enable  => $daemon_enable,
@@ -75,16 +74,16 @@ class puppetdashboard (
     workers_name   => $workers_name,
     workers_ensure => $workers_ensure,
     workers_enable => $workers_enable,
-    workers_flags => $workers_flags,
+    workers_flags  => $workers_flags,
   }
 
-  class { puppetdashboard::cron:
+  class { 'puppetdashboard::cron':
     installation_path => $installation_path,
     rake              => $rake,
   }
 
   Class['puppetdashboard::install'] ->
-  Class['puppetdashboard::config']  ->
+  Class['puppetdashboard::config']  ~>
   Class['puppetdashboard::service'] ->
   Class['puppetdashboard::cron']
 }

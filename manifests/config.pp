@@ -1,3 +1,7 @@
+# Private class, do not use directly.
+# Takes care about the config files,
+# and database migration.
+
 class puppetdashboard::config (
   $general_settings,
   $database_settings,
@@ -12,10 +16,10 @@ class puppetdashboard::config (
   }
 
   concat { "${installation_path}/config/database.yml":
-    ensure  => 'present',
-    owner   => '_puppet-dashboard',
-    group   => '_puppet-dashboard',
-    mode    => '0644',
+    ensure => 'present',
+    owner  => '_puppet-dashboard',
+    group  => '_puppet-dashboard',
+    mode   => '0644',
   }
 
   concat::fragment { 'puppetdashboard-settings-yml':
@@ -39,7 +43,7 @@ class puppetdashboard::config (
 
   exec { 'migrate puppetdashboard db':
     command     => '/usr/bin/sudo -u _puppet-dashboard LD_PRELOAD=libpthread.so /usr/local/bin/rake18 RAILS_ENV=production db:migrate',
-    cwd         => "${installation_path}",
+    cwd         => $installation_path,
     subscribe   => [ Concat["${installation_path}/config/settings.yml"], Concat["${installation_path}/config/database.yml"] ],
     refreshonly => true,
   }

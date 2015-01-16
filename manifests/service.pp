@@ -1,3 +1,6 @@
+# Private class, do not use directly.
+# Takes care about the services.
+
 class puppetdashboard::service (
   $daemon_name,
   $daemon_ensure,
